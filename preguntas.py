@@ -120,13 +120,11 @@ def pregunta_03():
     }
 
     # Defina una instancia de GridSearchCV con el pipeline y el diccionario de
-<<<<<<< HEAD
     # parámetros. Use cv = 5, y como métrica de evaluación el valor negativo del
     # error cuadrático medio.
-=======
     # parÃ¡metros. Use cv = 5, y como mÃ©trica de evaluaciÃ³n el valor negativo del
     # error cuadrÃ¡tico medio.
->>>>>>> 3bdbf3486461f0589775e08595c7ec7f2bc9d11d
+
     gridSearchCV = GridSearchCV(
         estimator=pipeline,
         param_grid=param_grid,
@@ -158,11 +156,10 @@ def pregunta_04():
     # Cargue las variables.
     X_train, X_test, y_train, y_test = pregunta_02()
 
-<<<<<<< HEAD
+
     # Evalúe el modelo con los conjuntos de entrenamiento y prueba.
-=======
     # EvalÃºe el modelo con los conjuntos de entrenamiento y prueba.
->>>>>>> 3bdbf3486461f0589775e08595c7ec7f2bc9d11d
+
     y_train_pred = gridSearchCV.predict(X_train)
     y_test_pred = gridSearchCV.predict(X_test)
 
