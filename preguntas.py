@@ -1,9 +1,9 @@
 """
-Regresión Lineal Multiple
+RegresiÃ³n Lineal Multiple
 -----------------------------------------------------------------------------------------
 
-En este laboratorio se entrenara un modelo de regresión lineal multiple que incluye la 
-selección de las n variables más relevantes usando una prueba f.
+En este laboratorio se entrenara un modelo de regresiÃ³n lineal multiple que incluye la 
+selecciÃ³n de las n variables mÃ¡s relevantes usando una prueba f.
 
 """
 # pylint: disable=invalid-name
@@ -34,7 +34,7 @@ def pregunta_01():
 
 def pregunta_02():
     """
-    Preparación de los conjuntos de datos.
+    PreparaciÃ³n de los conjuntos de datos.
     -------------------------------------------------------------------------------------
     """
 
@@ -44,7 +44,7 @@ def pregunta_02():
     # Cargue los datos y asigne los resultados a `X` y `y`.
     X, y = pregunta_01()
 
-    # Divida los datos de entrenamiento y prueba. La semilla del generador de números
+    # Divida los datos de entrenamiento y prueba. La semilla del generador de nÃºmeros
     # aleatorios es 12345. Use 300 patrones para la muestra de prueba.
     (X_train, X_test, y_train, y_test,) = train_test_split(
         X,
@@ -59,7 +59,7 @@ def pregunta_02():
 
 def pregunta_03():
     """
-    Especificación del pipeline y entrenamiento
+    EspecificaciÃ³n del pipeline y entrenamiento
     -------------------------------------------------------------------------------------
     """
 
@@ -84,7 +84,7 @@ def pregunta_03():
     pipeline = Pipeline(
         steps=[
             # Paso 1: Construya un column_transformer que aplica OneHotEncoder a las
-            # variables categóricas, y no aplica ninguna transformación al resto de
+            # variables categÃ³ricas, y no aplica ninguna transformaciÃ³n al resto de
             # las variables.
             (
                 "column_transfomer",
@@ -96,13 +96,13 @@ def pregunta_03():
                     remainder='passthrough',
                 ),
             ),
-            # Paso 2: Construya un selector de características que seleccione las K
-            # características más importantes. Utilice la función f_regression.
+            # Paso 2: Construya un selector de caracterÃ­sticas que seleccione las K
+            # caracterÃ­sticas mÃ¡s importantes. Utilice la funciÃ³n f_regression.
             (
                 "selectKBest",
                 SelectKBest(score_func=f_regression),
             ),
-            # Paso 3: Construya un modelo de regresión lineal.
+            # Paso 3: Construya un modelo de regresiÃ³n lineal.
             (
                 "model",
                 LinearRegression(),
@@ -113,15 +113,20 @@ def pregunta_03():
     # Cargua de las variables.
     X_train, _, y_train, _ = pregunta_02()
 
-    # Defina un diccionario de parámetros para el GridSearchCV. Se deben
+    # Defina un diccionario de parÃ¡metros para el GridSearchCV. Se deben
     # considerar valores desde 1 hasta 11 regresores para el modelo
     param_grid = {
         'selectKBest__k':list(range(1, 12)),
     }
 
     # Defina una instancia de GridSearchCV con el pipeline y el diccionario de
+<<<<<<< HEAD
     # parámetros. Use cv = 5, y como métrica de evaluación el valor negativo del
     # error cuadrático medio.
+=======
+    # parÃ¡metros. Use cv = 5, y como mÃ©trica de evaluaciÃ³n el valor negativo del
+    # error cuadrÃ¡tico medio.
+>>>>>>> 3bdbf3486461f0589775e08595c7ec7f2bc9d11d
     gridSearchCV = GridSearchCV(
         estimator=pipeline,
         param_grid=param_grid,
@@ -131,7 +136,7 @@ def pregunta_03():
         return_train_score=True,
     )
 
-    # Búsque la mejor combinación de regresores
+    # BÃºsque la mejor combinaciÃ³n de regresores
     gridSearchCV.fit(X_train, y_train)
 
     # Retorne el mejor modelo
@@ -140,7 +145,7 @@ def pregunta_03():
 
 def pregunta_04():
     """
-    Evaluación del modelo
+    EvaluaciÃ³n del modelo
     -------------------------------------------------------------------------------------
     """
 
@@ -153,7 +158,11 @@ def pregunta_04():
     # Cargue las variables.
     X_train, X_test, y_train, y_test = pregunta_02()
 
+<<<<<<< HEAD
     # Evalúe el modelo con los conjuntos de entrenamiento y prueba.
+=======
+    # EvalÃºe el modelo con los conjuntos de entrenamiento y prueba.
+>>>>>>> 3bdbf3486461f0589775e08595c7ec7f2bc9d11d
     y_train_pred = gridSearchCV.predict(X_train)
     y_test_pred = gridSearchCV.predict(X_test)
 
@@ -170,5 +179,5 @@ def pregunta_04():
         y_test_pred,
     ).round(2)
 
-    # Retorne el error cuadrático medio para entrenamiento y prueba
+    # Retorne el error cuadrÃ¡tico medio para entrenamiento y prueba
     return mse_train, mse_test
